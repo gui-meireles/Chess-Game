@@ -1,5 +1,6 @@
 package application;
 
+import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
@@ -37,7 +38,7 @@ public class UI {
     /**
      * Clear screen on every move
      * Obs: This will work on terminals that support ANSI escape codes
-     *
+     * <p>
      * Reference: https://stackoverflow.com/questions/2979383/java-clear-the-console
      */
     public static void clearScreen() {
@@ -57,6 +58,16 @@ public class UI {
         } catch (RuntimeException e) {
             throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
         }
+    }
+
+    /**
+     * Print current player and current turn
+     */
+    public static void printMatch(ChessMatch chessMatch) {
+        printBoard(chessMatch.getPieces());
+        System.out.println();
+        System.out.println("Turn: " + chessMatch.getTurn());
+        System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
     }
 
     /**
