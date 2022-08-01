@@ -11,7 +11,7 @@ public class UI {
 
     /**
      * Colors to board and pieces
-     *
+     * <p>
      * Reference: https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
      */
 
@@ -35,6 +35,17 @@ public class UI {
     public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
     /**
+     * Clear screen on every move
+     * Obs: This will work on terminals that support ANSI escape codes
+     *
+     * Reference: https://stackoverflow.com/questions/2979383/java-clear-the-console
+     */
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    /**
      * Cut the string and convert the number to integer
      */
     public static ChessPosition readChessPosition(Scanner sc) {
@@ -43,8 +54,7 @@ public class UI {
             char column = s.charAt(0);
             int row = Integer.parseInt(s.substring(1));
             return new ChessPosition(column, row);
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
         }
     }
